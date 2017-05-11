@@ -23,6 +23,14 @@ except ImportError as exc:
                       '"sudo pip install -r requirements.txt"'.format(exc))
     sys.exit(0)
 
+parser = argparse.ArgumentParser(description="Get settings via the command line.")
+parser.add_argument("-s",
+    "--settings",
+    type=str,
+    default="settings",
+    help="settings to import")
+settings = __import__(parser.parse_args().settings)
+
 mattermost_webhook_url = settings.mattermost_webhook_url
 mattermost_integration_token = settings.mattermost_integration_token
 delay_between_pulls = settings.delay_between_pulls
